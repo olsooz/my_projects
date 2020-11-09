@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200" rel="stylesheet">
+        <style>
+            body {
+                background-image: url('https://source.unsplash.com/1600x900/?joyful,delightful');
+                background-size: cover;
+                min-height: 100vh;
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+
+        <!-- JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+        <style type="text/css">
+            .tasksLine {
+                margin-top: 5px;
+
+            }
+
+            .card-text {
+                margin: 0 0 0 0;
+            }
+
+            .post-box {
+                background-color: rgba(255, 255, 255, 0.1);
+                width: 800px;
+                margin: 20px auto;
+                padding: 50px;
+                border: grey 1px solid;
+                border-radius: 5px;
+            }
+
+            .wrap {
+                width: 800px;
+                margin: 20px auto;
+            }
+
+
+        </style>
+
+        <script>
+            function openClose() {
+                // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
+                if ($("#post-box").css("display") == "block") {
+                    // post-box를 가리고
+                    $("#post-box").hide();
+                    // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
+                    $("#btn-post-box").text("만들기");
+                } else {
+                    // 아니면(눈에 보이지 않으면) post-box를 펴라
+                    $("#post-box").show();
+                    // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
+                    $("#btn-post-box").text("닫기");
+                }
+            }
+
+            // function postProject() {
+            //
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //     let title = $("#title").val()
+            //
+            //
+            //     $.ajax({
+            //         type: "POST",
+            //         url: "/project",
+            //         data: {
+            //             "title_give": title
+            //             "start_date": startDate,
+            //             "end_date": endDate,
+            //             "task1_name": task1Name,
+            //             "task2_name": task2Name,
+            //             "task3_name": task3Name,
+            //             "task4_name": task4Name,
+            //             "task5_name": task5Name,
+            //             "task1_progress": task1Progress,
+            //             "task2_progress": task2Progress,
+            //             "task3_progress": task3Progress,
+            //             "task4_progress": task4Progress,
+            //             "task5_progress": task5Progress
+            //
+            //         },
+            //         success: function (response) { // 성공하면
+            //             if (response["result"] == "success") {
+            //                 alert(response["msg"]);
+            //                 window.location.reload()
+            //             } else {
+            //                 alert("서버 오류!")
+            //             }
+            //         }
+            //     })
+            //
+            // }
+
+        </script>
+        <title>프로젝트 완성하기 _ 스코코10 _ 이숮이</title>
+    </head>
+
+    <body>
+        <div class="wrap">
+            <div class="jumbotron">
+                <h2 class="display-4">Where Am I?</h2>
+                <p class="lead">자기 과제의 진척률을 관리하세요.</p>
+                <hr class="my-4">
+                <p> 내가 얼마나 달성했는지 한 눈에 볼 수 있어요.</p>
+                <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">만들기
+                </button>
+            </div>
+
+            <div id="post-box" class="post-box" style="display:none">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">프로젝트명</span>
+                    </div>
+                    <input id="title" type="text" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">시작일</span>
+                    </div>
+                    <input id="startDate" type="date" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">완료일</span>
+                    </div>
+                    <input id="endDate" type="date" class="form-control" aria-label="Default"
+                           aria-describedby="inputGroup-sizing-default">
+
+                </div>
+
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text">세부과제1</span>
+                    <input id="task1Name" type="text" class="form-control" aria-label="Default" id="task1Title"
+                           aria-describedby="inputGroup-sizing-default">
+
+                    <select class="custom-select" id="task1Progress">
+                        <option selected>진행상태를 선택하세요!</option>
+                        <option value="0">0</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="60">60</option>
+                        <option value="80">80</option>
+                        <option value=100>100</option>
+                    </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="task1Progress">%</label>
+                    </div>
+                </div>
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text">세부과제2</span>
+                    <input type="text" class="form-control" aria-label="Default" id="task2Title"
+                           aria-describedby="inputGroup-sizing-default">
+                    <select class="custom-select" id="task2Progress">
+                        <option selected>진행상태를 선택하세요!</option>
+                        <option value="0">0</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="60">60</option>
+                        <option value="80">80</option>
+                        <option value=100>100</option>
+                    </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="task1Progress">%</label>
+                    </div>
+                </div>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">세부과제3</span>
+                    <input type="text" class="form-control" aria-label="Default" id="task3Title"
+                           aria-describedby="inputGroup-sizing-default">
+                    <select class="custom-select" id="task3Progress">
+                        <option selected>진행상태를 선택하세요!</option>
+                        <option value="0">0</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="60">60</option>
+                        <option value="80">80</option>
+                        <option value=100>100</option>
+                    </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="task1Progress">%</label>
+                    </div>
+                </div>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">세부과제4</span>
+                    <input type="text" class="form-control" aria-label="Default" id="task4Title"
+                           aria-describedby="inputGroup-sizing-default">
+                    <select class="custom-select" id="task4Progress">
+                        <option selected>진행상태를 선택하세요!</option>
+                        <option value="0">0</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="60">60</option>
+                        <option value="80">80</option>
+                        <option value=100>100</option>
+                    </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="task1Progress">%</label>
+                    </div>
+                </div>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">세부과제5</span>
+                    <input type="text" class="form-control" aria-label="Default" id="task5Title"
+                           aria-describedby="inputGroup-sizing-default">
+                    <select class="custom-select" id="task5Progress">
+                        <option selected>진행상태를 선택하세요!</option>
+                        <option value="0">0</option>
+                        <option value="20">20</option>
+                        <option value="40">40</option>
+                        <option value="60">60</option>
+                        <option value="80">80</option>
+                        <option value=100>100</option>
+                    </select>
+                    <div class="input-group-append">
+                        <label class="input-group-text" for="task1Progress">%</label>
+                    </div>
+                </div>
+
+                <br>
+                <button type="button" class="btn btn-outline-dark" onclick="postProject()">만들기</button>
+
+
+            </div>
+
+
+            <div class="row">
+
+                <div class="projectBox col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">프로젝트1</h5>
+                            <h6>완료까지 <b id="dday1" style="color: coral">5</b>일 남았어요!</h6>
+
+
+                            <div class="progress" style="height: 1px;">
+                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">1st</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">2rd</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">3rd</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tasksLine">
+                                <p class="card-text">4th</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tasksLine">
+                                <p class="card-text">5th</p>
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
+                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    </div>
+                                </div>
+                            </div>
+                            <Br>
+                            <a href="#" class="btn btn-primary">Update!</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </body>
+</html>
