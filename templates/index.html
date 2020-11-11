@@ -76,52 +76,67 @@
                 }
             }
 
-            // function postProject() {
-            //
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //     let title = $("#title").val()
-            //
-            //
-            //     $.ajax({
-            //         type: "POST",
-            //         url: "/project",
-            //         data: {
-            //             "title_give": title
-            //             "start_date": startDate,
-            //             "end_date": endDate,
-            //             "task1_name": task1Name,
-            //             "task2_name": task2Name,
-            //             "task3_name": task3Name,
-            //             "task4_name": task4Name,
-            //             "task5_name": task5Name,
-            //             "task1_progress": task1Progress,
-            //             "task2_progress": task2Progress,
-            //             "task3_progress": task3Progress,
-            //             "task4_progress": task4Progress,
-            //             "task5_progress": task5Progress
-            //
-            //         },
-            //         success: function (response) { // 성공하면
-            //             if (response["result"] == "success") {
-            //                 alert(response["msg"]);
-            //                 window.location.reload()
-            //             } else {
-            //                 alert("서버 오류!")
-            //             }
-            //         }
-            //     })
-            //
-            // }
+            function postProject() {
+
+                let title = $("#title").val()
+                let startDate = $("#startDate").val()
+                let endDate = $("#endDate").val()
+                let task1Name = $("#task1Title").val()
+                let task2Name = $("#task2Title").val()
+                let task3Name = $("#task3Title").val()
+                let task4Name = $("#task4Title").val()
+                let task5Name = $("#task5Title").val()
+                let task1Progress = $("#task1Progress").val()
+                let task2Progress = $("#task2Progress").val()
+                let task3Progress = $("#task3Progress").val()
+                let task4Progress = $("#task4Progress").val()
+                let task5Progress = $("#task5Progress").val()
+
+                if (title == '') {
+                    alert('프로젝트명을 입력해주세요.');
+                } else if (startDate == '') {
+                    alert('시작일을 입력해주세요.');
+                } else if (endDate == '') {
+                    alert('완료(목표)일을 입력해주세요.');
+                } else if (task1Name == '') {
+                    alert('세부과제명을 입력해주세요.');
+                } else {
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/project",
+                        data: {
+                            "title_give": title,
+                            "start_date": startDate,
+                            "end_date": endDate,
+                            "task1_name": task1Name,
+                            "task2_name": task2Name,
+                            "task3_name": task3Name,
+                            "task4_name": task4Name,
+                            "task5_name": task5Name,
+                            "task1_progress": task1Progress,
+                            "task2_progress": task2Progress,
+                            "task3_progress": task3Progress,
+                            "task4_progress": task4Progress,
+                            "task5_progress": task5Progress
+
+                        },
+                        success: function (response) { // 성공하면
+                            if (response["result"] == "success") {
+                                alert(response["msg"]);
+                                window.location.reload()
+                            } else {
+                                alert("서버 오류!")
+                            }
+                        }
+                    })
+
+                }
+            }
 
         </script>
+
         <title>프로젝트 완성하기 _ 스코코10 _ 이숮이</title>
     </head>
 
@@ -163,7 +178,7 @@
 
                 <div class="input-group-prepend">
                     <span class="input-group-text">세부과제1</span>
-                    <input id="task1Name" type="text" class="form-control" aria-label="Default" id="task1Title"
+                    <input id="task1Title" type="text" class="form-control" aria-label="Default"
                            aria-describedby="inputGroup-sizing-default">
 
                     <select class="custom-select" id="task1Progress">
@@ -228,7 +243,7 @@
                         <option value=100>100</option>
                     </select>
                     <div class="input-group-append">
-                        <label class="input-group-text" for="task1Progress">%</label>
+                        <label class="input-group-text" for="task4Progress">%</label>
                     </div>
                 </div>
                 <div class="input-group-prepend">
@@ -245,7 +260,7 @@
                         <option value=100>100</option>
                     </select>
                     <div class="input-group-append">
-                        <label class="input-group-text" for="task1Progress">%</label>
+                        <label class="input-group-text" for="task5Progress">%</label>
                     </div>
                 </div>
 
