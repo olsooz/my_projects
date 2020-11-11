@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify, request
 import requests
 from pymongo import MongoClient
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 
 client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
 db = client.dbsparta
@@ -13,9 +13,9 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+
 @app.route('/project', methods=['POST'])
 def post_project():
-
     title_receive = request.form['title_give']
     start_date = request.form['start_date']
     end_date = request.form['end_date']
@@ -29,6 +29,16 @@ def post_project():
     task3_progress = request.form['task3_progress']
     task4_progress = request.form['task4_progress']
     task5_progress = request.form['task5_progress']
+
+    # progress = [task1_progress, task2_progress, task3_progress, task4_progress, task5_progress]
+    # for score in progress:
+    #     total += score
+    # average = progress / len(progress)
+    now = datetime.today().strftime('%Y%m%d')
+    print(now)
+
+    dday = ''.join(end_date.split('-'))
+    print(dday)
 
     doc = {
         'title': title_receive,
@@ -44,22 +54,29 @@ def post_project():
         'task4_progress': task4_progress,
         'task5_name': task5_name,
         'task5_progress': task5_progress
+        # 'average' : average
+
     }
-
     db.myprojects.insert_one(doc)
-
-    # time_present = datetime.now()
-    # # end_time = datetime() #end_date를 datetime 패키지 안에 변환
-    # left_day = end_date - time_present
-    #
-    # progress = [task1_progress, task2_progress, task3_progress, task4_progress, task5_progress]
-    # for score in progress:
-    #     total += score
-    # average = progress / len(progress)
 
     print(title_receive)
 
     return jsonify({'result': 'success', 'msg': '저장 완료!'})
+
+
+
+@app.route('/projects', methods=['GET'])
+def view_projects():
+    # 여길 채워나가세요!
+
+
+
+    projects = list(db.myprojects.find({}, {"_id": False}))
+    # print(myprojects)
+
+    return_val = {'result': 'success', 'projectList': projects}
+
+    return jsonify(return_val)
 
 
 if __name__ == '__main__':

@@ -61,6 +61,15 @@
         </style>
 
         <script>
+            $(document).ready(function () {
+                alert('다 로딩됐다!')
+
+                // $("#card").html("");
+
+                viewProjects();
+
+            });
+
             function openClose() {
                 // id 값 post-box의 display 값이 block 이면(= 눈에 보이면)
                 if ($("#post-box").css("display") == "block") {
@@ -124,7 +133,7 @@
                         },
                         success: function (response) { // 성공하면
                             if (response["result"] == "success") {
-                                alert(response["msg"]);
+                                // alert(response["msg"]);
                                 window.location.reload()
                             } else {
                                 alert("서버 오류!")
@@ -134,6 +143,46 @@
 
                 }
             }
+
+            function viewProjects() {
+                $.ajax({
+                    type: "GET",
+                    url: "/projects",
+                    data: {},
+                    success: function (response) {
+
+                        console.log(response)
+
+                        if (response["result"] == "success") {
+                            // alert(response["msg"]);
+                            let cardlist = response['projectList']
+
+                            for (let i = 0; i < cardlist.length; i++) {
+                                let title = cardlist[i]['title']
+                                let start_day = cardlist[i]['start_day']
+                                let end_day = cardlist[i]['end_day']
+                                let task1_name = cardlist[i]['task1_name']
+                                let task1_progress = cardlist[i]['task1_progress']
+                                let task2_name = cardlist[i]['task2_name']
+                                let task2_progress = cardlist[i]['task2_progress']
+                                let task3_name = cardlist[i]['task3_name']
+                                let task3_progress = cardlist[i]['task3_progress']
+                                let task4_name = cardlist[i]['task4_name']
+                                let task4_progress = cardlist[i]['task4_progress']
+                                let task5_name = cardlist[i]['task5_name']
+                                let task5_progress = cardlist[i]['task5_progress']
+
+                                let temphtml = ``
+                                //
+                                $("#card").append(temphtml)
+
+
+                            }
+                        }
+                    }
+                })
+            }
+
 
         </script>
 
@@ -275,9 +324,9 @@
 
                 <div class="projectBox col-sm-6">
                     <div class="card">
-                        <div class="card-body">
+                        <div id="card" class="card-body">
                             <h5 class="card-title">프로젝트1</h5>
-                            <h6>완료까지 <b id="dday1" style="color: coral">5</b>일 남았어요!</h6>
+                            <h6>완료까지 <b style="color: coral">5</b>일 남았어요!</h6>
 
 
                             <div class="progress" style="height: 1px;">
@@ -314,6 +363,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="tasksLine">
                                 <p class="card-text">4th</p>
 
@@ -323,6 +373,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="tasksLine">
                                 <p class="card-text">5th</p>
                                 <div class="progress" style="height: 20px;">
@@ -331,11 +382,81 @@
                                     </div>
                                 </div>
                             </div>
+
                             <Br>
+
                             <a href="#" class="btn btn-primary">Update!</a>
+
                         </div>
+
+
                     </div>
                 </div>
+                <!--                <div id="card" class="projectBox col-sm-6">-->
+                <!--                    <div class="card">-->
+                <!--                        <div class="card-body">-->
+                <!--                            <h5 class="card-title">프로젝트1</h5>-->
+                <!--                            <h6>완료까지 <b id="dday1" style="color: coral">5</b>일 남았어요!</h6>-->
+
+
+                <!--                            <div class="progress" style="height: 1px;">-->
+                <!--                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"-->
+                <!--                                     aria-valuemin="0" aria-valuemax="100"></div>-->
+                <!--                            </div>-->
+
+                <!--                            <div class="tasksLine">-->
+                <!--                                <p class="card-text">1st</p>-->
+
+                <!--                                <div class="progress" style="height: 20px;">-->
+                <!--                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"-->
+                <!--                                         aria-valuemin="0" aria-valuemax="100">20%-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+
+                <!--                            <div class="tasksLine">-->
+                <!--                                <p class="card-text">2rd</p>-->
+
+                <!--                                <div class="progress" style="height: 20px;">-->
+                <!--                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"-->
+                <!--                                         aria-valuemin="0" aria-valuemax="100">20%-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+
+                <!--                            <div class="tasksLine">-->
+                <!--                                <p class="card-text">3rd</p>-->
+
+                <!--                                <div class="progress" style="height: 20px;">-->
+                <!--                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"-->
+                <!--                                         aria-valuemin="0" aria-valuemax="100">20%-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                            <div class="tasksLine">-->
+                <!--                                <p class="card-text">4th</p>-->
+
+                <!--                                <div class="progress" style="height: 20px;">-->
+                <!--                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"-->
+                <!--                                         aria-valuemin="0" aria-valuemax="100">20%-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                            <div class="tasksLine">-->
+                <!--                                <p class="card-text">5th</p>-->
+                <!--                                <div class="progress" style="height: 20px;">-->
+                <!--                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"-->
+                <!--                                         aria-valuemin="0" aria-valuemax="100">20%-->
+                <!--                                    </div>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                            <Br>-->
+                <!--                            <a href="#" class="btn btn-primary">Update!</a>-->
+                <!--                        </div>-->
+
+
+                <!--                    </div>-->
+                <!--                </div>-->
 
 
             </div>
