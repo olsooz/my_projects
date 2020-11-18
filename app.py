@@ -30,16 +30,6 @@ def post_project():
     task4_progress = request.form['task4_progress']
     task5_progress = request.form['task5_progress']
 
-    # progress = [task1_progress, task2_progress, task3_progress, task4_progress, task5_progress]
-    # for score in progress:
-    #     total += score
-    # average = progress / len(progress)
-    now = datetime.today().strftime('%Y%m%d')
-    print(now)
-
-    dday = ''.join(end_date.split('-'))
-    print(dday)
-
     doc = {
         'title': title_receive,
         'start_day': start_date,
@@ -56,7 +46,12 @@ def post_project():
         'task5_progress': task5_progress
         # 'average' : average
 
+        # progress = [task1_progress, task2_progress, task3_progress, task4_progress, task5_progress]
+        # for score in progress:
+        #     total += score
+        # average = progress / len(progress)
     }
+
     db.myprojects.insert_one(doc)
 
     print(title_receive)
@@ -64,15 +59,24 @@ def post_project():
     return jsonify({'result': 'success', 'msg': '저장 완료!'})
 
 
-
 @app.route('/projects', methods=['GET'])
 def view_projects():
     # 여길 채워나가세요!
 
-
-
     projects = list(db.myprojects.find({}, {"_id": False}))
-    # print(myprojects)
+
+    # dday 연산 후 프론트에 doc insert for문 삽입 (todolist)
+
+    end_day = projects[0]['end_day']
+    dday = datetime.strptime(end_day, '%Y-%m-%d').date()
+
+    print(dday)
+
+    now = datetime.now().date()
+
+    print(now)
+
+    print((dday - now).days)
 
     return_val = {'result': 'success', 'projectList': projects}
 
