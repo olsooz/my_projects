@@ -3,7 +3,9 @@ import requests
 from pymongo import MongoClient
 from datetime import date, datetime, timedelta
 
-client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
+# client = MongoClient('mongodb://test:test@52.78.138.113',27017)  # mongoDB는 27017 포트로 돌아갑니다.
+client = MongoClient('localhost', 27017)
+
 db = client.dbsparta
 
 app = Flask(__name__)
@@ -67,18 +69,31 @@ def view_projects():
 
     # dday 연산 후 프론트에 doc insert for문 삽입 (todolist)
 
-    end_day = projects[0]['end_day']
-    dday = datetime.strptime(end_day, '%Y-%m-%d').date()
+    proj_result = []
 
-    print(dday)
+    for data in projects:
+        end_day = data['end_day']
+        dday = datetime.strptime(end_day, '%Y-%m-%d').date()
+        # print(dday)
 
-    now = datetime.now().date()
+        now = datetime.now().date()
+        # print(now)
 
-    print(now)
+        left_day = ((dday - now).days)
 
-    print((dday - now).days)
+        data['left_day'] = left_day
 
-    return_val = {'result': 'success', 'projectList': projects}
+        proj_result.append(data)
+
+    # dday_doc = {
+    #     'left_day': left_day,
+    # }
+    #
+    # db.myprojects.insert_one(dday_doc)
+
+    return_val = {'result': 'success', 'projectList': proj_result}
+
+    print(proj_result)
 
     return jsonify(return_val)
 

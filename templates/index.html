@@ -69,7 +69,7 @@
             $(document).ready(function () {
                 alert('다 로딩됐다!')
 
-                // $("#card").html("");
+                $("#proj").html("");
 
                 viewProjects();
 
@@ -114,7 +114,6 @@
                     alert('완료(목표)일을 입력해주세요.');
                 } else if (task1Name == '') {
                     alert('세부과제명을 입력해주세요.');
-
                 } else {
 
 
@@ -151,6 +150,7 @@
             }
 
             function viewProjects() {
+
                 $.ajax({
                     type: "GET",
                     url: "/projects",
@@ -177,10 +177,77 @@
                                 let task4_progress = cardlist[i]['task4_progress']
                                 let task5_name = cardlist[i]['task5_name']
                                 let task5_progress = cardlist[i]['task5_progress']
+                                let dday = cardlist[i]['left_day']
 
-                                let temphtml = ``
+                                let temphtml = `
+<div class="card" class="card-columns">
+ <div id="card-body" class="card-body">
+                            <h5 class="card-title">${title}</h5>
+                            <h6>완료까지 <b style="color: coral">${dday}</b>일 남았어요!</h6>
+
+
+                            <div class="progress" style="height: 1px;">
+                                <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">${task1_name}</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: ${task1_progress}%;" aria-valuenow="${task1_progress}"
+                                         aria-valuemin="0" aria-valuemax="100">${task1_progress}%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">${task2_name}</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: ${task2_progress}%;" aria-valuenow="${task2_progress}"
+                                         aria-valuemin="0" aria-valuemax="100">${task2_progress}%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">${task3_name}</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: ${task3_progress}%;" aria-valuenow="${task3_progress}"
+                                         aria-valuemin="0" aria-valuemax="100">${task3_progress}%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">${task4_name}</p>
+
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: ${task4_progress}%;" aria-valuenow="${task4_progress}"
+                                         aria-valuemin="0" aria-valuemax="100">${task4_progress}%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tasksLine">
+                                <p class="card-text">${task5_name}</p>
+                                <div class="progress" style="height: 20px;">
+                                    <div class="progress-bar " role="progressbar" style="width: ${task5_progress}%;" aria-valuenow="${task5_progress}"
+                                         aria-valuemin="0" aria-valuemax="100">${task5_progress}%
+                                    </div>
+                                </div>
+                            </div>
+
+                            <Br>
+
+                            <a href="#" class="btn btn-primary">Update!</a>
+
+                        </div>
+</div>`
                                 //
-                                $("#card").append(temphtml)
+                                $("#proj").append(temphtml)
 
 
                             }
@@ -327,75 +394,82 @@
 
 
             <div class="row">
+                <!--                <div class="projectBox col-sm-6">-->
+                <div class="projectBox">
+                    <div class="card-columns" id="proj">
+                        <div class="card">
+                            <div id="card-body" class="card-body">
+                                <h5 class="card-title">프로젝트1</h5>
+                                <h6>완료까지 <b style="color: coral">5</b>일 남았어요!</h6>
 
-                <div class="projectBox col-sm-6">
-                    <div class="card">
-                        <div id="card" class="card-body">
-                            <h5 class="card-title">프로젝트1</h5>
-                            <h6>완료까지 <b style="color: coral">5</b>일 남았어요!</h6>
 
+                                <div class="progress" style="height: 1px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
 
-                            <div class="progress" style="height: 1px;">
-                                <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                     aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
+                                <div class="tasksLine">
+                                    <p class="card-text">1st</p>
 
-                            <div class="tasksLine">
-                                <p class="card-text">1st</p>
-
-                                <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
-                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100">20%
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="tasksLine">
-                                <p class="card-text">2rd</p>
+                                <div class="tasksLine">
+                                    <p class="card-text">2rd</p>
 
-                                <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
-                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100">20%
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="tasksLine">
-                                <p class="card-text">3rd</p>
+                                <div class="tasksLine">
+                                    <p class="card-text">3rd</p>
 
-                                <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
-                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100">20%
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="tasksLine">
-                                <p class="card-text">4th</p>
+                                <div class="tasksLine">
+                                    <p class="card-text">4th</p>
 
-                                <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
-                                         aria-valuemin="0" aria-valuemax="100">20%
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100">20%
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="tasksLine">
-                                <p class="card-text">5th</p>
-                                <div class="progress" style="height: 20px;">
-                                    <div class="progress-bar " role="progressbar" style="width: 20%;" aria-valuenow="20"
-                                         aria-valuemin="0" aria-valuemax="100">20%
+                                <div class="tasksLine">
+                                    <p class="card-text">5th</p>
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0" aria-valuemax="100">20%
+                                        </div>
                                     </div>
                                 </div>
+
+                                <Br>
+
+                                <a href="#" class="btn btn-primary">Update!</a>
+
                             </div>
 
-                            <Br>
-
-                            <a href="#" class="btn btn-primary">Update!</a>
 
                         </div>
-
-
                     </div>
                 </div>
 
