@@ -73,6 +73,8 @@
 
                 viewProjects();
 
+                console.log()
+
             });
 
             function openClose() {
@@ -87,6 +89,26 @@
                     $("#post-box").show();
                     // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
                     $("#btn-post-box").text("닫기");
+                }
+            }
+
+
+            function isValid() {
+
+                if (title == '') {
+                    alert('프로젝트명을 입력해주세요.');
+                    return false;
+                } else if (startDate == '') {
+                    alert('시작일을 입력해주세요.');
+                    return false;
+                } else if (endDate == '') {
+                    alert('완료(목표)일을 입력해주세요.');
+                    return false;
+                } else if (task1Name == '') {
+                    alert('세부과제명을 입력해주세요.');
+                    return false;
+                } else {
+                    return true;
                 }
             }
 
@@ -106,80 +128,148 @@
                 let task4Progress = $("#task4Progress").val()
                 let task5Progress = $("#task5Progress").val()
 
-                if (title == '') {
-                    alert('프로젝트명을 입력해주세요.');
-                } else if (startDate == '') {
-                    alert('시작일을 입력해주세요.');
-                } else if (endDate == '') {
-                    alert('완료(목표)일을 입력해주세요.');
-                } else if (task1Name == '') {
-                    alert('세부과제명을 입력해주세요.');
-                } else {
-
-
-                    $.ajax({
-                        type: "POST",
-                        url: "/project",
-                        data: {
-                            "title_give": title,
-                            "start_date": startDate,
-                            "end_date": endDate,
-                            "task1_name": task1Name,
-                            "task2_name": task2Name,
-                            "task3_name": task3Name,
-                            "task4_name": task4Name,
-                            "task5_name": task5Name,
-                            "task1_progress": task1Progress,
-                            "task2_progress": task2Progress,
-                            "task3_progress": task3Progress,
-                            "task4_progress": task4Progress,
-                            "task5_progress": task5Progress
-
-                        },
-                        success: function (response) { // 성공하면
-                            if (response["result"] == "success") {
-                                // alert(response["msg"]);
-                                window.location.reload()
-                            } else {
-                                alert("서버 오류!")
-                            }
-                        }
-                    })
-
+                if (isValid() == false) {
+                    return;
                 }
-            }
 
-            function viewProjects() {
 
                 $.ajax({
-                    type: "GET",
-                    url: "/projects",
-                    data: {},
-                    success: function (response) {
-
-                        console.log(response)
-
+                    type: "POST",
+                    url: "/project",
+                    data: {
+                        "title_give": title,
+                        "start_date": startDate,
+                        "end_date": endDate,
+                        "task1_name": task1Name,
+                        "task2_name": task2Name,
+                        "task3_name": task3Name,
+                        "task4_name": task4Name,
+                        "task5_name": task5Name,
+                        "task1_progress": task1Progress,
+                        "task2_progress": task2Progress,
+                        "task3_progress": task3Progress,
+                        "task4_progress": task4Progress,
+                        "task5_progress": task5Progress,
+                    },
+                    success: function (response) { // 성공하면
                         if (response["result"] == "success") {
                             // alert(response["msg"]);
-                            let cardlist = response['projectList']
+                            window.location.reload()
+                        } else {
+                            alert("서버 오류!")
+                        }
+                    }
+                })
 
-                            for (let i = 0; i < cardlist.length; i++) {
-                                let title = cardlist[i]['title']
-                                let start_day = cardlist[i]['start_day']
-                                let end_day = cardlist[i]['end_day']
-                                let task1_name = cardlist[i]['task1_name']
-                                let task1_progress = cardlist[i]['task1_progress']
-                                let task2_name = cardlist[i]['task2_name']
-                                let task2_progress = cardlist[i]['task2_progress']
-                                let task3_name = cardlist[i]['task3_name']
-                                let task3_progress = cardlist[i]['task3_progress']
-                                let task4_name = cardlist[i]['task4_name']
-                                let task4_progress = cardlist[i]['task4_progress']
-                                let task5_name = cardlist[i]['task5_name']
-                                let task5_progress = cardlist[i]['task5_progress']
-                                let dday = cardlist[i]['left_day']
 
-                                let temphtml = `
+            }
+
+            // function editProject(title) {
+            //     if ($("#post-box").css("display") == "block") {
+            //         // post-box를 가리고
+            //         $("#post-box").hide();
+            //         $("#btn-cancel").hide();
+            //         // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
+            //         $("#btn-update-box").text("수정");
+            //
+            //
+            //     } else {
+            //         // 아니면(눈에 보이지 않으면) post-box를 펴라
+            //         $("#post-box").show();
+            //         // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
+            //         $("#btn-cancel").show();
+            //
+
+                    //     // 기존 메모 내용을 가져온다.
+                    //     let title = $("#title").text();
+                    //     let startDate = $("#startDate").text();
+                    //     let endDate = $("#endDate").text();
+                    //     let task1Name = $("#task1Title").text();
+                    //     let task2Name = $("#task2Title").text();
+                    //     let task3Name = $("#task3Title").text();
+                    //     let task4Name = $("#task4Title").text();
+                    //     let task5Name = $("#task5Title").text();
+                    //     let task1Progress = $("#task1Progress").text();
+                    //     let task2Progress = $("#task2Progress").text();
+                    //     let task3Progress = $("#task3Progress").text();
+                    //     let task4Progress = $("#task4Progress").text();
+                    //     let task5Progress = $("#task5Progress").text();
+                    //
+                    //     // 수정 입력 칸에 기존 값을 넣어둔다.
+                    //     $(`#${title}-textarea`).val(title);
+                    //     $(`#${startDate}-textarea`).val(startDate);
+                    //     $(`#${endDate}-textarea`).val(endDate);
+                    //     $(`#${task1Name}-textarea`).val(task1Name);
+                    //     $(`#${task2Name}-textarea`).val(task2Name);
+                    //     $(`#${task3Name}-textarea`).val(task3Name);
+                    //     $(`#${task4Name}-textarea`).val(task4Name);
+                    //     $(`#${task5Name}-textarea`).val(task5Name);
+                    //     $(`#${task1Progress}-textarea`).val(task1Progress);
+                    //     $(`#${task2Progress}-textarea`).val(task2Progress);
+                    //     $(`#${task3Progress}-textarea`).val(task3Progress);
+                    //     $(`#${task4Progress}-textarea`).val(task4Progress);
+                    //     $(`#${task5Progress}-textarea`).val(task5Progress);
+                    //
+                    // }
+
+
+                    // function submitEdit(title) {
+                    //     let contents = $(`#${title}-textarea`).val();
+                    //     if (isValidContents() == false) {
+                    //         return;
+                    //
+                    //
+                    //     }
+                    //
+                    //     $.ajax({
+                    //         type: "POST",
+                    //         url: "/project/edit",
+                    //         data: {username_give: username, contents_give: contents},
+                    //         success: function (response) {
+                    //             if (response['result'] == 'success') {
+                    //                 alert(response['msg']);
+                    //                 window.location.reload();
+                    //             } else {
+                    //                 alert('변경에 실패했습니다.');
+                    //             }
+                    //         }
+                    //     });
+                    // }
+
+                    function viewProjects() {
+
+                        $("#proj").html("");
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/projects",
+                            data: {},
+                            success: function (response) {
+
+                                console.log(response)
+
+                                if (response["result"] == "success") {
+                                    alert(response["msg"]);
+
+                                    let cardlist = response['projectList']
+
+                                    for (let i = 0; i < cardlist.length; i++) {
+                                        let title = cardlist[i]['title']
+                                        let start_day = cardlist[i]['start_day']
+                                        let end_day = cardlist[i]['end_day']
+                                        let task1_name = cardlist[i]['task1_name']
+                                        let task1_progress = cardlist[i]['task1_progress']
+                                        let task2_name = cardlist[i]['task2_name']
+                                        let task2_progress = cardlist[i]['task2_progress']
+                                        let task3_name = cardlist[i]['task3_name']
+                                        let task3_progress = cardlist[i]['task3_progress']
+                                        let task4_name = cardlist[i]['task4_name']
+                                        let task4_progress = cardlist[i]['task4_progress']
+                                        let task5_name = cardlist[i]['task5_name']
+                                        let task5_progress = cardlist[i]['task5_progress']
+                                        let dday = cardlist[i]['left_day']
+
+                                        let temphtml = `
 <div class="card" class="card-columns">
  <div id="card-body" class="card-body">
                             <h5 class="card-title">${title}</h5>
@@ -242,19 +332,20 @@
 
                             <Br>
 
-                            <a href="#" class="btn btn-primary">Update!</a>
+                            <a id="btn-update-box" href="#" class="btn btn-primary" onclick="editProject('${title}')">Update!</a>
 
                         </div>
 </div>`
-                                //
-                                $("#proj").append(temphtml)
+                                        $("#proj").append(temphtml)
 
+                                    }
+
+                                }
 
                             }
-                        }
+                        })
+
                     }
-                })
-            }
 
 
         </script>
@@ -387,7 +478,8 @@
                 </div>
 
                 <br>
-                <button type="button" class="btn btn-outline-dark" onclick="postProject()">만들기</button>
+                <button type="button" id="btn-update" class="btn btn-outline-dark" onclick="postProject()">만들기</button>
+                <button type="button" id="btn-cancel" class="btn btn-outline-dark" onclick="cancelBox()">취소</button>
 
 
             </div>
