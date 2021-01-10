@@ -16,53 +16,13 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/projects', methods=['GET'])
-def view_projects():
-    # 여길 채워나가세요!
-
-    projects = list(db.myprojects.find({}, {"_id": False}))
-
-    # dday 연산 후 프론트에 doc insert for문 삽입 (todolist)
-
-    proj_result = []
-
-    for data in projects:
-        end_day = data['end_day']
-        dday = datetime.strptime(end_day, '%Y-%m-%d').date()
-        # print(dday)
-
-        now = datetime.now().date()
-        # print(now)
-
-        left_day = ((dday - now).days)
-
-        data['left_day'] = left_day
-
-        proj_result.append(data)
-
-        # projectlist = sorted(proj_result(), key=lambda x:x[1])
-
-    # dday_doc = {
-    #     'left_day': left_day,
-    # }
-    #
-    # db.myprojects.insert_one(dday_doc)
-
-
-    return_val = {'result': 'success', 'projectList': proj_result}
-
-    print(proj_result)
-
-    return jsonify(return_val)
-
-
 @app.route('/project', methods=['POST'])
 def post_project():
     title_receive = request.form['title_give']
     start_date = request.form['start_date']
     end_date = request.form['end_date']
-    task2_name = request.form['task2_name']
     task1_name = request.form['task1_name']
+    task2_name = request.form['task2_name']
     task3_name = request.form['task3_name']
     task4_name = request.form['task4_name']
     task5_name = request.form['task5_name']
@@ -101,35 +61,47 @@ def post_project():
     return jsonify({'result': 'success', 'msg': '저장 완료!'})
 
 
-@app.route('/project/edit', methods=["POST"])
-def edit_project():
-    title_receive = request.form['title_give']
-    start_date = request.form['start_date']
-    end_date = request.form['end_date']
-    task2_name = request.form['task2_name']
-    task1_name = request.form['task1_name']
-    task3_name = request.form['task3_name']
-    task4_name = request.form['task4_name']
-    task5_name = request.form['task5_name']
-    task1_progress = request.form['task1_progress']
-    task2_progress = request.form['task2_progress']
-    task3_progress = request.form['task3_progress']
-    task4_progress = request.form['task4_progress']
-    task5_progress = request.form['task5_progress']
+@app.route('/projects', methods=['GET'])
+def view_projects():
+    # 여길 채워나가세요!
 
-    db.myprojects.update_one(
-        {'title': title_receive}, {'start_day': start_date}, {'end_day': end_date}, {'task1_name': task1_name},
-        {'task1_progress': task1_progress},
-        {'task2_name': task2_name}, {'task2_progress': task2_progress},
-        {'task3_name': task3_name},
-        {'task3_progress': task3_progress},
-        {'task4_name': task4_name},
-        {'task4_progress': task4_progress},
-        {'task5_name': task5_name},
-        {'task5_progress': task5_progress}
-    )
+    projects = list(db.myprojects.find({}, {"_id": False}))
 
-    return jsonify({'result': 'success', 'msg': '수정 성공!'})
+    # dday 연산 후 프론트에 doc insert for문 삽입 (todolist)
+
+    proj_result = []
+
+    for data in projects:
+        end_day = data['end_day']
+        dday = datetime.strptime(end_day, '%Y-%m-%d').date()
+        # print(dday)
+
+        now = datetime.now().date()
+
+        left_day = ((dday - now).days)
+
+        data['left_day'] = left_day
+
+        proj_result.append(data)
+
+    proj_result.sort(key=lambda x: x.get('left_day')) #대박! 성공했다!
+    # proj_result.sorted(key=left_day)
+
+
+    # dday_doc = {
+    #     'left_day': left_day,
+    # }
+    #
+    # db.myprojects.insert_one(dday_doc)
+
+    return_val = {'result': 'success', 'projectList': proj_result}
+
+    print(proj_result)
+
+    return jsonify(return_val)
+# # @app.route('/projects', methods=['GET'])
+# def re_projects():
+
 
 
 if __name__ == '__main__':
