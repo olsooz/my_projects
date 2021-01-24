@@ -98,9 +98,10 @@ def view_projects():
 
     print(proj_result)
 
+# @app.route('/projects/edit', methods=['GET'])
+# def edit_projects():
+
     return jsonify(return_val)
-# # @app.route('/projects', methods=['GET'])
-# def re_projects():
 
 
 
