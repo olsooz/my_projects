@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
-    <head>
+<head>
 
-        <meta property="og:title" content="where I am."/>
-        <meta property="og:description" content="자기 주도! 마이 프로젝트"/>
-        <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
+    <meta property="og:title" content="where I am."/>
+    <meta property="og:description" content="자기 주도! 마이 프로젝트"/>
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.png') }}"/>
 
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200" rel="stylesheet">
-        <style>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200" rel="stylesheet">
+    <style>
             body {
                 background-image: url('https://source.unsplash.com/1600x900/?joyful,delightful');
                 background-size: cover;
@@ -17,28 +17,31 @@
                 justify-content: center;
                 align-items: center;
             }
-        </style>
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
 
-        <!-- JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    </style>
 
-        <style type="text/css">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+    <style type="text/css">
             .tasksLine {
                 margin-top: 5px;
 
@@ -61,15 +64,21 @@
                 width: 1000px;
                 margin: 20px auto;
             }
+            .row {
 
+
+            }
 
             .area-edit {
             display: none;
             }
 
-        </style>
 
-        <script>
+
+
+    </style>
+
+    <script>
             $(document).ready(function () {
                 alert('welcome to my project!')
 
@@ -92,6 +101,38 @@
                     // 다시 버튼을 클릭하면, 박스 닫기를 할 수 있게 텍스트 바꿔두기
                     $("#btn-post-box").text("닫기");
                 }
+            }
+
+            function editProject(title) {
+
+                if ($("#edit-box").css("display") == "block") {
+                    $("#edit-box").hide();
+                    // 다시 버튼을 클릭하면, 박스 열기를 할 수 있게 텍스트 바꿔두기
+                    $("#btn-edit-box").text("수정");
+                } else {
+                    $("#edit-box").show();
+                    $("#btn-edit-box").text("취소");
+                    $("#btn-edit-box-cancel").show();
+
+
+<!--                    showEdit(title)-->
+                    // let task1name = $(`${title}-#task1Title`).text();
+                    // $(`#${title}-task1Title`).val(task1name);
+                    //
+                }}
+            // function ShowProjects(_id) {}
+
+
+
+            function showEdit(title) {
+                // 수정 입력 칸, 수정완료 버튼, 취소 버튼을 보여준다.
+                $(`#${title}-task1name`).show();
+                $(`#${title}-submit`).show();
+                $(`#${title}-cancel`).show();
+
+                $(`#${title}-task1Title`).show();
+
+
             }
 
             function postProject() {
@@ -151,36 +192,6 @@
                     })
 
                 }
-            }
-
-            function editProject(title) {
-
-                if ($("#post-box").css("display") == "block") {
-                    // post-box를 가리고
-                    $("#post-box").hide();
-
-                } else {
-                    // 아니면(눈에 보이지 않으면) post-box를 펴라
-                    $("#post-box").show();
-
-                    showEdit(title)
-                    // let task1name = $(`${title}-#task1Title`).text();
-                    // $(`#${title}-task1Title`).val(task1name);
-                    //
-                }}
-            // function ShowProjects(_id) {}
-
-
-
-            function showEdit(title) {
-                // 수정 입력 칸, 수정완료 버튼, 취소 버튼을 보여준다.
-                $(`#${title}-task1name`).show();
-                $(`#${title}-submit`).show();
-                $(`#${title}-cancel`).show();
-
-                $(`#${title}-task1Title`).show();
-
-
             }
 
             function viewProjects() {
@@ -296,7 +307,7 @@
                             <Br>
 
 <!--                        <a href="#" class="btn btn-primary" onclick="openClose()">Update!</a>-->
-                            <a id="${title}-edit" href="#" class="btn btn-primary" onclick="editProject('${title}')">수정</a>
+                            <a id="" href="#" class="btn btn-primary" onclick="editProject('${title}')">수정</a>
 
                         </div>
 </div>
@@ -305,226 +316,352 @@
 
             }
 
-        </script>
 
-        <title>프로젝트 완성하기 _ 스코코10 _ 이숮이</title>
-    </head>
 
-    <body>
-        <div class="wrap">
-            <div class="jumbotron">
-                <h2 class="display-4">Where Am I?</h2>
-                <p class="lead">자기 과제의 진척률을 관리하세요.</p>
-                <hr class="my-4">
-                <p> 내가 얼마나 달성했는지 한 눈에 볼 수 있어요.</p>
-                <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">만들기
-                </button>
+
+    </script>
+
+    <title>프로젝트 완성하기 _ 스코코10 _ 이숮이</title>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="jumbotron">
+        <h2 class="display-4">Where Am I?</h2>
+        <p class="lead">자기 과제의 진척률을 관리하세요.</p>
+        <hr class="my-4">
+        <p> 내가 얼마나 달성했는지 한 눈에 볼 수 있어요.</p>
+        <button onclick="openClose()" id="btn-post-box" type="button" class="btn btn-primary">만들기
+        </button>
+    </div>
+
+    <div id="post-box" class="post-box" style="display:none">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">프로젝트명</span>
             </div>
+            <input id="title" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
 
-                <div id="post-box" class="post-box" style="display:none">
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">프로젝트명</span>
-                        </div>
-                        <input id="title" type="text" class="form-control" aria-label="Default"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">시작일</span>
-                        </div>
-                        <input id="startDate" type="date" class="form-control" aria-label="Default"
-                               aria-describedby="inputGroup-sizing-default">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">완료일</span>
-                        </div>
-                        <input id="endDate" type="date" class="form-control" aria-label="Default"
-                               aria-describedby="inputGroup-sizing-default">
-
-                    </div>
-
-
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">세부과제1</span>
-                        <input id="task1Title" type="text" class="form-control"placeholder="과제를 입력해주세요." aria-label="Default"
-                               aria-describedby="inputGroup-sizing-default">
-
-                        <select class="custom-select" id="task1Progress">
-                            <option value="" disabled selected hidden>어디까지 왔나요?</option>
-                            <option value="0">0</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="60">60</option>
-                            <option value="80">80</option>
-                            <option value=100>100</option>
-                        </select>
-                        <div class="input-group-append">
-                            <label class="input-group-text" for="task1Progress">%</label>
-                        </div>
-                    </div>
-
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">세부과제2</span>
-                        <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task2Title"
-                               aria-describedby="inputGroup-sizing-default">
-                        <select class="custom-select" id="task2Progress">
-                            <option value="" disabled selected hidden>어디까지 왔나요?</option>
-                            <option value="0">0</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="60">60</option>
-                            <option value="80">80</option>
-                            <option value=100>100</option>
-                        </select>
-                        <div class="input-group-append">
-                            <label class="input-group-text" for="task1Progress">%</label>
-                        </div>
-                    </div>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">세부과제3</span>
-                        <input type="text" class="form-control"placeholder="과제를 입력해주세요." aria-label="Default" id="task3Title"
-                               aria-describedby="inputGroup-sizing-default">
-                        <select class="custom-select" id="task3Progress">
-                            <option value="0" disabled selected hidden>어디까지 왔나요?</option>
-                            <option value="0">0</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="60">60</option>
-                            <option value="80">80</option>
-                            <option value=100>100</option>
-                        </select>
-                        <div class="input-group-append">
-                            <label class="input-group-text" for="task1Progress">%</label>
-                        </div>
-                    </div>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">세부과제4</span>
-                        <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task4Title"
-                               aria-describedby="inputGroup-sizing-default">
-                        <select class="custom-select" id="task4Progress">
-                            <option value="0" disabled selected hidden>어디까지 왔나요?</option>
-                            <option value="0">0</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="60">60</option>
-                            <option value="80">80</option>
-                            <option value=100>100</option>
-                        </select>
-                        <div class="input-group-append">
-                            <label class="input-group-text" for="task4Progress">%</label>
-                        </div>
-                    </div>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">세부과제5</span>
-                        <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task5Title"
-                               aria-describedby="inputGroup-sizing-default">
-                        <select class="custom-select" id="task5Progress">
-                            <option value="" disabled selected hidden>어디까지 왔나요?</option>
-                            <option value="0">0</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="60">60</option>
-                            <option value="80">80</option>
-                            <option value=100>100</option>
-                        </select>
-                        <div class="input-group-append">
-                            <label class="input-group-text" for="task5Progress">%</label>
-                        </div>
-                    </div>
-
-                    <br>
-                    <button type="button" class="btn btn-outline-dark" onclick="postProject()">만들기</button>
-                    <button type="button" id="${title}-submit" class="btn btn-outline-dark area-edit" onclick="submitEdit('${title}')">수정</button>
-                    <button type="button" id="${title}-cancel" class="btn btn-outline-dark area-edit" onclick="hideEdit('${title}')">취소</button>
-
-
-
-                </div>
-                <div class="row" id="proj">
-                    <!--                <div class="projectBox col-sm-6">-->
-                    <div class="projectBox">
-                        <div class="card-columns">
-                            <div class="card">
-                                <div id="card-body" class="card-body">
-                                    <h5 class="card-title">프로젝트1</h5>
-                                    <h6>완료까지 <b style="color: coral">5</b>일 남았어요!</h6>
-
-
-                                    <div class="progress" style="height: 1px;">
-                                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
-                                             aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-
-                                    <div class="tasksLine">
-                                        <p class="card-text">1st</p>
-
-                                        <div class="progress" style="height: 20px;">
-                                            <div class="progress-bar " role="progressbar" style="width: 20%;"
-                                                 aria-valuenow="20"
-                                                 aria-valuemin="0" aria-valuemax="100">20%
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tasksLine">
-                                        <p class="card-text">2rd</p>
-
-                                        <div class="progress" style="height: 20px;">
-                                            <div class="progress-bar " role="progressbar" style="width: 20%;"
-                                                 aria-valuenow="20"
-                                                 aria-valuemin="0" aria-valuemax="100">20%
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tasksLine">
-                                        <p class="card-text">3rd</p>
-
-                                        <div class="progress" style="height: 20px;">
-                                            <div class="progress-bar " role="progressbar" style="width: 20%;"
-                                                 aria-valuenow="20"
-                                                 aria-valuemin="0" aria-valuemax="100">20%
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tasksLine">
-                                        <p class="card-text">4th</p>
-
-                                        <div class="progress" style="height: 20px;">
-                                            <div class="progress-bar " role="progressbar" style="width: 20%;"
-                                                 aria-valuenow="20"
-                                                 aria-valuemin="0" aria-valuemax="100">20%
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="tasksLine">
-                                        <p class="card-text">5th</p>
-                                        <div class="progress" style="height: 20px;">
-                                            <div class="progress-bar " role="progressbar" style="width: 20%;"
-                                                 aria-valuenow="20"
-                                                 aria-valuemin="0" aria-valuemax="100">20%
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <Br>
-
-                                    <a href="#" class="btn btn-primary">Update!</a>
-
-                                </div>
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">시작일</span>
             </div>
+            <input id="startDate" type="date" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+            <div class="input-group-prepend">
+                <span class="input-group-text">완료일</span>
+            </div>
+            <input id="endDate" type="date" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
 
         </div>
-    </body>
+
+
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제1</span>
+            <input id="task1Title" type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+
+            <select class="custom-select" id="task1Progress">
+                <option value="" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task1Progress">%</label>
+            </div>
+        </div>
+
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제2</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task2Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task2Progress">
+                <option value="" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task1Progress">%</label>
+            </div>
+        </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제3</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task3Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task3Progress">
+                <option value="0" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task1Progress">%</label>
+            </div>
+        </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제4</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task4Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task4Progress">
+                <option value="0" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task4Progress">%</label>
+            </div>
+        </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제5</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task5Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task5Progress">
+                <option value="" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task5Progress">%</label>
+            </div>
+        </div>
+
+        <br>
+        <button type="button" class="btn btn-outline-dark" onclick="postProject()">만들기</button>
+        </button>
+
+
+    </div>
+    <div id="edit-box" class="post-box" style="display:none">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">프로젝트명</span>
+            </div>
+            <input id="title" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">시작일</span>
+            </div>
+            <input id="startDate" type="date" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+            <div class="input-group-prepend">
+                <span class="input-group-text">완료일</span>
+            </div>
+            <input id="endDate" type="date" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+
+        </div>
+
+
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제1</span>
+            <input id="task1Title" type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+
+            <select class="custom-select" id="task1Progress">
+                <option value="" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task1Progress">%</label>
+            </div>
+        </div>
+
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제2</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task2Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task2Progress">
+                <option value="" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task1Progress">%</label>
+            </div>
+        </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제3</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task3Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task3Progress">
+                <option value="0" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task1Progress">%</label>
+            </div>
+        </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제4</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task4Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task4Progress">
+                <option value="0" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task4Progress">%</label>
+            </div>
+        </div>
+        <div class="input-group-prepend">
+            <span class="input-group-text">세부과제5</span>
+            <input type="text" class="form-control" placeholder="과제를 입력해주세요." aria-label="Default" id="task5Title"
+                   aria-describedby="inputGroup-sizing-default">
+            <select class="custom-select" id="task5Progress">
+                <option value="" disabled selected hidden>어디까지 왔나요?</option>
+                <option value="0">0</option>
+                <option value="20">20</option>
+                <option value="40">40</option>
+                <option value="60">60</option>
+                <option value="80">80</option>
+                <option value=100>100</option>
+            </select>
+            <div class="input-group-append">
+                <label class="input-group-text" for="task5Progress">%</label>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+        <button type="button" id="${title}-submit" class="btn btn-outline-dark"
+                onclick="submitEdit('${title}')">수정
+        </button>
+        <button type="button" id="btn-edit-box-cancel" class="btn btn-outline-dark"
+          onclick="editProject">취소
+        </button>
+        </div>
+
+
+    </div>
+    <div class="row" id="proj">
+        <!--                <div class="projectBox col-sm-6">-->
+        <div class="projectBox">
+            <div class="card-columns">
+                <div class="card">
+                    <div id="card-body" class="card-body">
+                        <h5 class="card-title">프로젝트1</h5>
+                        <h6>완료까지 <b style="color: coral">5</b>일 남았어요!</h6>
+
+
+                        <div class="progress" style="height: 1px;">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+
+                        <div class="tasksLine">
+                            <p class="card-text">1st</p>
+
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100">20%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tasksLine">
+                            <p class="card-text">2rd</p>
+
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100">20%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tasksLine">
+                            <p class="card-text">3rd</p>
+
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100">20%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tasksLine">
+                            <p class="card-text">4th</p>
+
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100">20%
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tasksLine">
+                            <p class="card-text">5th</p>
+                            <div class="progress" style="height: 20px;">
+                                <div class="progress-bar " role="progressbar" style="width: 20%;"
+                                     aria-valuenow="20"
+                                     aria-valuemin="0" aria-valuemax="100">20%
+                                </div>
+                            </div>
+                        </div>
+
+                        <Br>
+
+                        <a href="#" class="btn btn-primary">Update!</a>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</div>
+</body>
 </html>
