@@ -61,6 +61,46 @@ def post_project():
     return jsonify({'result': 'success', 'msg': '저장 완료!'})
 
 
+# @app.route('/proj_edit', methods=['POST'])
+# def post_project():
+#     title_receive = request.form['title_give']
+#     start_date = request.form['start_date']
+#     end_date = request.form['end_date']
+#     task1_name = request.form['task1_name']
+#     task2_name = request.form['task2_name']
+#     task3_name = request.form['task3_name']
+#     task4_name = request.form['task4_name']
+#     task5_name = request.form['task5_name']
+#     task1_progress = request.form['task1_progress']
+#     task2_progress = request.form['task2_progress']
+#     task3_progress = request.form['task3_progress']
+#     task4_progress = request.form['task4_progress']
+#     task5_progress = request.form['task5_progress']
+#
+#     doc = {
+#         'title': title_receive,
+#         'start_day': start_date,
+#         'end_day': end_date,
+#         'task1_name': task1_name,
+#         'task1_progress': task1_progress,
+#         'task2_name': task2_name,
+#         'task2_progress': task2_progress,
+#         'task3_name': task3_name,
+#         'task3_progress': task3_progress,
+#         'task4_name': task4_name,
+#         'task4_progress': task4_progress,
+#         'task5_name': task5_name,
+#         'task5_progress': task5_progress
+#
+#     }
+#
+#     db.myprojects.update_one(doc)
+#
+#     print(title_receive)
+#
+#     return jsonify({'result': 'success', 'msg': '수정 완료!'})
+
+
 @app.route('/projects', methods=['GET'])
 def view_projects():
     # 여길 채워나가세요!
